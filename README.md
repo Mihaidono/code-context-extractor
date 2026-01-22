@@ -30,7 +30,7 @@ resource "aws_s3_bucket" "example" {
    - **Windows / Linux:** `Ctrl+Shift+P`
    - **macOS:** `Cmd+Shift+P`
 3. Run:
-   - **Bundle Folder Tree (Code Context Extractor)**
+   - **Create Code Context File**
 4. Select the root folder you want to bundle.
 5. Select where to save the output file (e.g. `bundle.txt`).
 6. Optionally enter file extensions to include (space-separated), for example:
