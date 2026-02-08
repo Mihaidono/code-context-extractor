@@ -3,7 +3,7 @@
   "publisher": "Mihaidono",
   "displayName": "Project Code Snapshot",
   "description": "Aggregates source code from a selected folder recursively into a single file, including file paths and names, to generate project context for AI tools.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "icon": "assets/icon.png",
   "keywords": [
     "vscode",
