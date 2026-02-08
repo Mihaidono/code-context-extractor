@@ -1,9 +1,10 @@
 {
-  "name": "code-context-extractor",
+  "name": "project-code-snapshot",
   "publisher": "Mihaidono",
-  "displayName": "Code Context Extractor",
+  "displayName": "Project Code Snapshot",
   "description": "Aggregates source code from a selected folder recursively into a single file, including file paths and names, to generate project context for AI tools.",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "icon": "assets/icon.png",
   "keywords": [
     "vscode",
     "bundle",
@@ -18,11 +19,15 @@
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mihaidono/code-context-extractor"
+  },
   "contributes": {
     "commands": [
       {
-        "command": "code-context-extractor.bundle",
-        "title": "Create Code Context File"
+        "command": "project-code-snapshot.bundle",
+        "title": "Create Code Snapshot File"
       }
     ]
   },

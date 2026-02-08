@@ -87,7 +87,7 @@ async function gatherFiles(
 
 export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
-    "code-context-extractor.bundle",
+    "project-code-snapshot.bundle",
     async () => {
       // Pick folder
       const folderPick = await vscode.window.showOpenDialog({
@@ -124,6 +124,23 @@ export function activate(context: vscode.ExtensionContext) {
             .filter(Boolean)
         : undefined;
 
+      // Ask if user wants to respect .gitignore
+      const gitignoreChoice = await vscode.window.showQuickPick(
+        [
+          { label: "Yes", description: "Respect .gitignore" },
+          { label: "No", description: "Ignore .gitignore" },
+        ],
+        {
+          placeHolder: "Respect .gitignore?",
+        },
+      );
+
+      if (!gitignoreChoice) {
+        return;
+      }
+
+      const useGitignore = gitignoreChoice.label === "Yes";
+
       await vscode.window.withProgress(
         {
           location: vscode.ProgressLocation.Notification,
@@ -131,8 +148,12 @@ export function activate(context: vscode.ExtensionContext) {
           cancellable: false,
         },
         async (progress) => {
-          progress.report({ message: "Loading .gitignore (if present)..." });
-          const ig = await loadGitignore(root);
+          progress.report({
+            message: useGitignore
+              ? "Loading .gitignore (if present)..."
+              : "Skipping .gitignore...",
+          });
+          const ig = useGitignore ? await loadGitignore(root) : null;
 
           progress.report({ message: "Enumerating files..." });
           const relFiles = await gatherFiles(root, ig, extensions);
